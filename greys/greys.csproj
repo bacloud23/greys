@@ -3,7 +3,6 @@
   <PropertyGroup Label="Build">
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
-    <PackAsTool>true</PackAsTool>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -14,7 +13,4 @@
     <PackageTags>eyes, green, blue, yellow</PackageTags>
   </PropertyGroup>
   
-  <ItemGroup Label="Package References">
-    <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1"/>
-  </ItemGroup>
 </Project>

@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "greys": {
-      "commandName": "Project",
-      "commandLineArgs": "--port 5000"
-    }
-  }
-}
