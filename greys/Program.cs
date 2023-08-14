@@ -1,4 +1,6 @@
 ﻿using greys;
+using Pastel;
+using System.Drawing;
 using System.Runtime.InteropServices;
 
 namespace ManagedColorPlayground
@@ -10,6 +12,7 @@ namespace ManagedColorPlayground
 
         static void Main(string[] args)
         {
+            welcomeUser();
 
             List<string> colorFiltersStr = new List<string> {
                 "Neutral",
@@ -22,7 +25,7 @@ namespace ManagedColorPlayground
                 "NegativeSepia",
                 "HueShift180",
                 "NegativeHueShift180"
-             };
+              };
 
             float[] identity = BuiltinMatrices.Identity.Cast<float>().ToArray();
             float[] Negative = BuiltinMatrices.Negative.Cast<float>().ToArray();
@@ -35,8 +38,18 @@ namespace ManagedColorPlayground
             float[] HueShift180 = BuiltinMatrices.HueShift180.Cast<float>().ToArray();
             float[] NegativeHueShift180 = BuiltinMatrices.NegativeHueShift180.Cast<float>().ToArray();
 
-
-            List<float[]> colorFilters = new List<float[]> { identity, Negative, GrayScale, NegativeGrayScale, Red, NegativeRed, Sepia, NegativeSepia, HueShift180, NegativeHueShift180 };
+            List<float[]> colorFilters = new List<float[]> {
+                identity,
+                Negative,
+                GrayScale,
+                NegativeGrayScale,
+                Red,
+                NegativeRed,
+                Sepia,
+                NegativeSepia,
+                HueShift180,
+                NegativeHueShift180
+              };
             var magEffectInvert = new MAGCOLOREFFECT
             {
                 transform = Negative
@@ -44,11 +57,8 @@ namespace ManagedColorPlayground
             MagInitialize();
 
             int optionsCount = colorFiltersStr.Count;
-
             int selected = 0;
-
             bool done = false;
-
             while (!done)
             {
                 for (int i = 0; i < optionsCount; i++)
@@ -64,7 +74,6 @@ namespace ManagedColorPlayground
                     }
 
                     Console.WriteLine($"{i}> {colorFiltersStr[i]}");
-
                     Console.ResetColor();
                 }
 
@@ -89,7 +98,6 @@ namespace ManagedColorPlayground
                     Console.CursorTop = Console.CursorTop - optionsCount;
             }
 
-
             Console.WriteLine($"Selected {selected}.");
 
             colorFiltersStr = colorFiltersStr.ConvertAll(d => d.ToLower());
@@ -110,12 +118,53 @@ namespace ManagedColorPlayground
                 Console.WriteLine("Color filter = {0}, description = {1}", kvp.Key, kvp.Value);
             }*/
 
-            
             Console.ReadLine();
             MagUninitialize();
 
         }
 
+        private static void welcomeUser()
+        {
+            // Get an array with the values of ConsoleColor enumeration members.
+            ConsoleColor[] colors = (ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor));
+            // Save the current background and foreground colors.
+            ConsoleColor currentBackground = Console.BackgroundColor;
+            ConsoleColor currentForeground = Console.ForegroundColor;
+
+            // Display all foreground colors except the one that matches the background.
+            Console.WriteLine("All the foreground colors except {0}, the background color:",
+                              currentBackground);
+            foreach (var color in colors)
+            {
+                if (color == currentBackground) continue;
+
+                Console.ForegroundColor = color;
+                Console.WriteLine("   The foreground color is {0}.", color);
+            }
+            Console.WriteLine();
+            // Restore the foreground color.
+            Console.ForegroundColor = currentForeground;
+
+            // Display each background color except the one that matches the current foreground color.
+            Console.WriteLine("All the background colors except {0}, the foreground color:",
+                              currentForeground);
+            foreach (var color in colors)
+            {
+                if (color == currentForeground) continue;
+
+                Console.BackgroundColor = color;
+                Console.WriteLine("   The background color is {0}.", color);
+            }
+
+            // Restore the original console colors.
+            Console.ResetColor();
+            Console.WriteLine("\nOriginal colors restored...");
+            Console.Write("  Red      ".Pastel(Color.Black).PastelBg("FF0000"));
+            Console.Write("  Green    ".Pastel(Color.Black).PastelBg("00FF00"));
+            Console.Write("  Blue     ".Pastel(Color.Black).PastelBg("0000FF"));
+            Console.Write("  Yellow   ".Pastel(Color.Black).PastelBg("FFFF00"));
+            Console.WriteLine("");
+        }
     }
 
     static class NativeMethods

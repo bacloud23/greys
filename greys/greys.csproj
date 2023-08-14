@@ -12,5 +12,9 @@
     <Description>This is a description</Description>
     <PackageTags>eyes, green, blue, yellow</PackageTags>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Pastel" Version="4.1.0" />
+  </ItemGroup>
   
 </Project>
