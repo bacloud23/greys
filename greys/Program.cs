@@ -1,4 +1,25 @@
-﻿using greys;
+﻿// Copyright (c) 2023 A.B
+// yanna92yar@gmail.com
+
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
+using greys;
 using Pastel;
 using System.Drawing;
 using System.Runtime.InteropServices;
@@ -24,7 +45,10 @@ namespace ManagedColorPlayground
                 "Sepia",
                 "NegativeSepia",
                 "HueShift180",
-                "NegativeHueShift180"
+                "NegativeHueShift180",
+                "NegativeHueShift180Variation1",
+                "NegativeHueShift180Variation2",
+                "NegativeHueShift180Variation3"
               };
 
             float[] identity = BuiltinMatrices.Identity.Cast<float>().ToArray();
@@ -37,6 +61,9 @@ namespace ManagedColorPlayground
             float[] NegativeSepia = BuiltinMatrices.NegativeSepia.Cast<float>().ToArray();
             float[] HueShift180 = BuiltinMatrices.HueShift180.Cast<float>().ToArray();
             float[] NegativeHueShift180 = BuiltinMatrices.NegativeHueShift180.Cast<float>().ToArray();
+            float[] NegativeHueShift180Variation1 = BuiltinMatrices.NegativeHueShift180Variation1.Cast<float>().ToArray();
+            float[] NegativeHueShift180Variation2 = BuiltinMatrices.NegativeHueShift180Variation2.Cast<float>().ToArray();
+            float[] NegativeHueShift180Variation3 = BuiltinMatrices.NegativeHueShift180Variation3.Cast<float>().ToArray();
 
             List<float[]> colorFilters = new List<float[]> {
                 identity,
@@ -48,7 +75,10 @@ namespace ManagedColorPlayground
                 Sepia,
                 NegativeSepia,
                 HueShift180,
-                NegativeHueShift180
+                NegativeHueShift180,
+                NegativeHueShift180Variation1,
+                NegativeHueShift180Variation2,
+                NegativeHueShift180Variation3
               };
             var magEffectInvert = new MAGCOLOREFFECT
             {
@@ -125,40 +155,6 @@ namespace ManagedColorPlayground
 
         private static void welcomeUser()
         {
-            // Get an array with the values of ConsoleColor enumeration members.
-            ConsoleColor[] colors = (ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor));
-            // Save the current background and foreground colors.
-            ConsoleColor currentBackground = Console.BackgroundColor;
-            ConsoleColor currentForeground = Console.ForegroundColor;
-
-            // Display all foreground colors except the one that matches the background.
-            Console.WriteLine("All the foreground colors except {0}, the background color:",
-                              currentBackground);
-            foreach (var color in colors)
-            {
-                if (color == currentBackground) continue;
-
-                Console.ForegroundColor = color;
-                Console.WriteLine("   The foreground color is {0}.", color);
-            }
-            Console.WriteLine();
-            // Restore the foreground color.
-            Console.ForegroundColor = currentForeground;
-
-            // Display each background color except the one that matches the current foreground color.
-            Console.WriteLine("All the background colors except {0}, the foreground color:",
-                              currentForeground);
-            foreach (var color in colors)
-            {
-                if (color == currentForeground) continue;
-
-                Console.BackgroundColor = color;
-                Console.WriteLine("   The background color is {0}.", color);
-            }
-
-            // Restore the original console colors.
-            Console.ResetColor();
-            Console.WriteLine("\nOriginal colors restored...");
             Console.Write("  Red      ".Pastel(Color.Black).PastelBg("FF0000"));
             Console.Write("  Green    ".Pastel(Color.Black).PastelBg("00FF00"));
             Console.Write("  Blue     ".Pastel(Color.Black).PastelBg("0000FF"));
