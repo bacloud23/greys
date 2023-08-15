@@ -30,6 +30,13 @@ namespace greys
         /// no color transformation
         /// </summary>
         public static float[,] Identity { get; private set; }
+        public static float[,] Protanopia { get; private set; }
+        public static float[,] Protanomaly { get; private set; }
+        public static float[,] Deuteranomaly { get; private set; }
+        public static float[,] Deuteranopia { get; private set; }
+        public static float[,] Tritanopia { get; private set; }
+        public static float[,] Tritanomaly { get; private set; }
+
         /// <summary>
         /// simple colors transformations
         /// </summary>
@@ -76,6 +83,50 @@ namespace greys
                 {  0.0f,  0.0f,  0.0f,  1.0f,  0.0f },
                 {  0.0f,  0.0f,  0.0f,  0.0f,  1.0f }
             };
+            // https://dev.to/ndesmic/exploring-color-math-through-color-blindness-2m2h
+            Protanopia = new float[,] {
+                { 0.567f, 0.558f, 0, 0, 0 },
+                { 0.433f, 0.442f, 0.242f, 0, 0 },
+                { 0, 0, 0.758f, 0, 0 },
+                { 0, 0, 0, 1, 0 },
+                { 0, 0, 0, 0, 1 }
+            };
+            Protanomaly = new float[,] {
+                { 0.817f, 0.333f, 0, 0, 0 },
+                { 0.183f, 0.667f, 0.125f, 0, 0 },
+                { 0, 0, 0.875f, 0, 0 },
+                { 0, 0, 0, 1, 0 },
+                { 0, 0, 0, 0, 1 }
+            };
+            Deuteranopia = new float[,] {
+                { 0.625f, 0.7f, 0, 0, 0 },
+                { 0.375f, 0.3f, 0.3f, 0, 0 },
+                { 0, 0, 0.7f, 0, 0 },
+                { 0, 0, 0, 1, 0 },
+                { 0, 0, 0, 0, 1 }
+            };
+            Deuteranomaly = new float[,] {
+                { 0.8f, 0.258f, 0, 0, 0 },
+                { 0.2f, 0.742f, 0.142f, 0, 0 },
+                { 0, 0, 0.858f, 0, 0 },
+                { 0, 0, 0, 1, 0 },
+                { 0, 0, 0, 0, 1 }
+            };
+            Tritanopia = new float[,] {
+                { 0.95f, 0, 0, 0, 0 },
+                { 0.05f, 0.433f, 0.475f, 0, 0 },
+                { 0, 0.567f, 0.525f, 0, 0 },
+                { 0, 0, 0, 1, 0 },
+                { 0, 0, 0, 0, 1 }
+            };
+            Tritanomaly = new float[,] {
+                { 0.967f, 0, 0, 0, 0 },
+                { 0.033f, 0.733f, 0.183f, 0, 0 },
+                { 0, 0.267f, 0.817f, 0, 0 },
+                { 0, 0, 0, 1, 0 },
+                { 0, 0, 0, 0, 1 }
+            };
+
             Negative = new float[,] {
                 { -1.0f,  0.0f,  0.0f,  0.0f,  0.0f },
                 {  0.0f, -1.0f,  0.0f,  0.0f,  0.0f },

@@ -37,6 +37,13 @@ namespace ManagedColorPlayground
 
             List<string> colorFiltersStr = new List<string> {
                 "Neutral",
+                "Protanopia",
+                "Protanomaly",
+                "Deuteranopia",
+                "Deuteranomaly",
+                "Tritanopia",
+                "Tritanomaly",
+
                 "Negative",
                 "GrayScale",
                 "NegativeGrayScale",
@@ -52,6 +59,13 @@ namespace ManagedColorPlayground
               };
 
             float[] identity = BuiltinMatrices.Identity.Cast<float>().ToArray();
+            float[] Protanopia = BuiltinMatrices.Protanopia.Cast<float>().ToArray();
+            float[] Protanomaly = BuiltinMatrices.Protanomaly.Cast<float>().ToArray();
+            float[] Deuteranomaly = BuiltinMatrices.Deuteranomaly.Cast<float>().ToArray();
+            float[] Deuteranopia = BuiltinMatrices.Deuteranopia.Cast<float>().ToArray();
+            float[] Tritanopia = BuiltinMatrices.Tritanopia.Cast<float>().ToArray();
+            float[] Tritanomaly = BuiltinMatrices.Tritanomaly.Cast<float>().ToArray();
+
             float[] Negative = BuiltinMatrices.Negative.Cast<float>().ToArray();
             float[] GrayScale = BuiltinMatrices.GrayScale.Cast<float>().ToArray();
             float[] NegativeGrayScale = BuiltinMatrices.NegativeGrayScale.Cast<float>().ToArray();
@@ -67,6 +81,13 @@ namespace ManagedColorPlayground
 
             List<float[]> colorFilters = new List<float[]> {
                 identity,
+                Protanopia,
+                Protanomaly,
+                Deuteranopia,
+                Deuteranomaly,
+                Tritanopia,
+                Tritanomaly,
+
                 Negative,
                 GrayScale,
                 NegativeGrayScale,
@@ -89,21 +110,27 @@ namespace ManagedColorPlayground
             int optionsCount = colorFiltersStr.Count;
             int selected = 0;
             bool done = false;
+            List<string> alphabet = new List<string> { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l" };
+
+
             while (!done)
             {
                 for (int i = 0; i < optionsCount; i++)
                 {
                     if (selected == i)
                     {
-                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Black;
                         Console.Write("> ");
                     }
                     else
                     {
                         Console.Write("  ");
                     }
-
-                    Console.WriteLine($"{i}> {colorFiltersStr[i]}");
+                    if (i < 7)
+                        Console.WriteLine($"{i}> {colorFiltersStr[i]}");
+                    else
+                        Console.WriteLine($"{alphabet[i - 7]}. {colorFiltersStr[i]}");
                     Console.ResetColor();
                 }
 
@@ -131,22 +158,6 @@ namespace ManagedColorPlayground
             Console.WriteLine($"Selected {selected}.");
 
             colorFiltersStr = colorFiltersStr.ConvertAll(d => d.ToLower());
-            /*Dictionary<string, string> descriptions = new Dictionary<string, string>();
-            descriptions.Add(colorFilters[0], "no color transformation");
-            descriptions.Add(colorFilters[1], "simple colors transformation.");
-            descriptions.Add(colorFilters[2], "simple colors transformation.");
-            descriptions.Add(colorFilters[3], "simple colors transformation.");
-            descriptions.Add(colorFilters[4], "simple colors transformation.");
-            descriptions.Add(colorFilters[5], "simple colors transformation.");
-            descriptions.Add(colorFilters[6], "simple colors transformation.");
-            descriptions.Add(colorFilters[7], "simple colors transformation.");
-            descriptions.Add(colorFilters[8], "simple colors transformation.");
-            descriptions.Add(colorFilters[9], "simple colors transformation.");*/
-
-            /*foreach (KeyValuePair<string, string> kvp in descriptions)
-            {
-                Console.WriteLine("Color filter = {0}, description = {1}", kvp.Key, kvp.Value);
-            }*/
 
             Console.ReadLine();
             MagUninitialize();
@@ -159,6 +170,10 @@ namespace ManagedColorPlayground
             Console.Write("  Green    ".Pastel(Color.Black).PastelBg("00FF00"));
             Console.Write("  Blue     ".Pastel(Color.Black).PastelBg("0000FF"));
             Console.Write("  Yellow   ".Pastel(Color.Black).PastelBg("FFFF00"));
+            Console.WriteLine("");
+            Console.WriteLine("Make photos and colors easier to see by applying a color filter to your screen.");
+            Console.WriteLine("Use arrows to navigate through color filters.");
+            Console.WriteLine("Press \"Enter\" to apply and choose \"Neutral\" filter to go back to normal (or just close the app).");
             Console.WriteLine("");
         }
     }
